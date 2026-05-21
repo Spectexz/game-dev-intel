@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Game & Dev Intelligence</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-dark text-light p-4">
+    <nav class="navbar navbar-dark bg-black mb-4 px-4">
+    <span class="navbar-brand fs-4">🎮 Game & Dev Intelligence Platform</span>
+    <span class="text-secondary">Last updated: {{ games[0].last_updated.strftime('%Y-%m-%d %H:%M') if games else 'N/A' }}</span>
+    </nav>
+
+    <h2 class="mb-3">Top Steam Games</h2>
+    <div class="row">
+        {% for game in games %}
+        <div class="col-md-3 mb-4">
+            <div class="card bg-secondary text-light">
+                <img src="{{ game.header_image }}" class="card-img-top">
+                <div class="card-body">
+                    <h5 class="card-title">{{ game.name }}</h5>
+                    <p class="card-text">{{ game.genres }}</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <h2 class="mb-3">Trending GitHub Repos</h2>
+    <table class="table table-dark table-striped">
+        <thead>
+            <tr>
+                <th>Repo</th>
+                <th>Language</th>
+                <th>Stars Today</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for repo in repos %}
+            <tr>
+                <td><a href="https://github.com/{{ repo.repo_name }}" target="_blank" class="text-light">{{ repo.repo_name }}</a></td>
+                <td>{{ repo.language if repo.language else "-" }}</td>
+                <td>{{ repo.Stars }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
